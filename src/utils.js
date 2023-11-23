@@ -7,6 +7,12 @@ const propNames = new Set(['id', 'className', 'textContent', 'onclick']);
  * @param children {...Node} Вложенные элементы
  * @returns {HTMLElement}
  */
+export function randomcode(){
+  let max = 999999
+  let min = 0
+  return (Math.floor(Math.random() * (max - min)) + min)
+  }
+
 export function createElement(name, props = {}, ...children) {
   const element = document.createElement(name);
 
@@ -25,4 +31,17 @@ export function createElement(name, props = {}, ...children) {
   }
 
   return element;
+}
+
+export function setNumber(number) {
+    let s = number % 10;
+    let b = number % 100;
+
+    if (b > 10 && b < 20 || s == 1) {
+        return 'раз';
+    } else if (s > 1 && s < 5) {
+        return 'раза';
+    } else {
+        return 'раз';
+    }
 }
