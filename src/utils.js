@@ -7,12 +7,6 @@ const propNames = new Set(['id', 'className', 'textContent', 'onclick']);
  * @param children {...Node} Вложенные элементы
  * @returns {HTMLElement}
  */
-export function randomcode(){
-  let max = 999999
-  let min = 0
-  return (Math.floor(Math.random() * (max - min)) + min)
-  }
-
 export function createElement(name, props = {}, ...children) {
   const element = document.createElement(name);
 
@@ -33,15 +27,28 @@ export function createElement(name, props = {}, ...children) {
   return element;
 }
 
-export function setNumber(number) {
-    let s = number % 10;
-    let b = number % 100;
+/**
+ * Функция для проверки числа, на необходимость постановки необходимой буквы в конце слова
+ */
+export function substitutionInWordOnce(number, string) {
+  const stringNum = number.toString();
+  const lastDigit = stringNum.slice(-1);
+  const lastTwoDigitNumber = stringNum.slice(-2);
 
-    if (b > 10 && b < 20 || s == 1) {
-        return 'раз';
-    } else if (s > 1 && s < 5) {
-        return 'раза';
-    } else {
-        return 'раз';
-    }
+  if
+  (
+      lastDigit > 1
+      && lastDigit < 5
+      && (lastTwoDigitNumber > 20 || lastTwoDigitNumber < 10)
+  ) return string
+
+  return ''
+}
+
+export function checkingArrayAndCreatingValue(array) {
+  if(array.length === 0) return 0
+  const massiveValueCode = array.map(el => {
+    return el.code
+  })
+  return Math.max(...massiveValueCode)
 }

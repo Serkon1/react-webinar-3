@@ -1,5 +1,5 @@
 import React from 'react';
-import { setNumber, createElement } from './utils.js';
+import {createElement, substitutionInWordOnce} from './utils.js';
 import './styles.css';
 
 /**
@@ -20,21 +20,32 @@ function App({store}) {
         <button onClick={() => store.addItem()}>Добавить</button>
       </div>
       <div className='App-center'>
-        <div className='List'>{
-          list.map(item =>
-            <div key={item.code} className='List-item'>
-              <div className={'Item' + (item.selected ? ' Item_selected' : '')}
-                   onClick={() => store.selectItem(item.code)}>
-                <div className='Item-code'>{item.code}</div>
-                <div className='Item-title'>{item.title}{item.count === 0 ? null : ` | Выделяли ${item.count}  ${setNumber(item.count)}`}</div>
-                <div className='Item-actions'>
-                  <button onClick={() => store.deleteItem(item.code)}>
-                    Удалить
-                  </button>
+        <div className='List'>
+          {
+              list.map(item =>
+                <div key={item.code} className='List-item'>
+                  <div className={'Item' + (item.selected ? ' Item_selected' : '')}
+                       onClick={(event) => store.selectItem(item.code)}>
+                    <div className='Item-code'>{item.code}</div>
+                    <div className='Item-title'>
+                        {item.title + (
+                            !item.numberOfDischarges
+                            ? ''
+                            : ' | Выделяли  ' + item.numberOfDischarges + ' раз' + substitutionInWordOnce(item.numberOfDischarges, 'a')
+                        )}
+                    </div>
+                    <div className='Item-actions'>
+                      <button onClick={(event) => {
+                          event.stopPropagation()
+                          store.deleteItem(item.code)
+                      }}>
+                        Удалить
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
           )}
+
         </div>
       </div>
     </div>
