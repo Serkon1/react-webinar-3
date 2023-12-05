@@ -1,25 +1,52 @@
 .Item {
   display: flex;
   justify-content: flex-start;
-  transition: background-color 1s;
-}
-
-.Item_selected {
-  background: #75aaf1;
-  color: #fff;
+  align-items: center;
+  transition: background-color 1s
 }
 
 .Item-code {
   padding: 20px 10px 20px 20px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .Item-title {
   width: 100%;
   padding: 20px 10px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.Item-price {
+  margin: 0;
+  padding: 0;
+  color: #404040;
+  text-align: right;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.Item-quantity {
+  margin: 0;
+  padding: 0 0 0 62px;
+  color: #404040;
+  text-align: right;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
 }
 
 .Item-actions {
   display: flex;
   justify-content: flex-end;
-  padding: 20px 20px 20px 10px;
+  padding: 19px 15px 20px 24px;
 }

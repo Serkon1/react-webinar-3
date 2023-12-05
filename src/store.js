@@ -1,4 +1,5 @@
-import {generateCode} from "./utils";
+
+import { generateCode } from "./utils";
 
 /**
  * Хранилище состояния приложения
@@ -43,12 +44,52 @@ class Store {
   /**
    * Добавление новой записи
    */
-  addItem() {
+  addItem(item) {
+    const itemExist = this.doesExist(item.code);
+    const count = 1;
+
+    if (itemExist) {
+      itemExist.quantity += 1
+      itemExist.total = this.countTotal(itemExist.price, itemExist.quantity)
+    } else {
+      this.setState({
+        ...this.state,
+        list: [...this.state.list, {
+          code: item.code,
+          title: item.title,
+          price: item.price,
+          quantity: count,
+          total: this.countTotal(item.price, item.quantity || count),
+        }]
+      });
+    };
+  };
+
+  /**
+    * Удаление записи по коду
+    * @param code
+    */
+  deleteItem(code) {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: generateCode(), title: 'Новая запись'}]
+      list: this.state.list.filter(item => item.code !== code)
     })
   };
+
+  doesExist(code) {
+    return this.state.list.find(item => item.code === code)
+  }
+
+  countTotal(price, quantity) {
+    return (price * quantity)
+  }
+
+  findTotal() {
+    const total = this.state.list.reduce(function (result, item) {
+      return result + (item.total)
+    }, 0);
+    return total;
+  }
 
   /**
    * Удаление записи по коду
@@ -61,28 +102,6 @@ class Store {
       list: this.state.list.filter(item => item.code !== code)
     })
   };
-
-  /**
-   * Выделение записи по коду
-   * @param code
-   */
-  selectItem(code) {
-    this.setState({
-      ...this.state,
-      list: this.state.list.map(item => {
-        if (item.code === code) {
-          // Смена выделения и подсчёт
-          return {
-            ...item,
-            selected: !item.selected,
-            count: item.selected ? item.count : item.count + 1 || 1,
-          };
-        }
-        // Сброс выделения если выделена
-        return item.selected ? {...item, selected: false} : item;
-      })
-    })
-  }
 }
 
 export default Store;

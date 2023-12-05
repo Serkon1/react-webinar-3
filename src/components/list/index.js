@@ -2,13 +2,22 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Item from "../item";
 import './style.css';
+import { cn as bem } from '@bem-react/classname';
 
-function List({list, onDeleteItem, onSelectItem}) {
+const cn = bem('List')
+
+function List(props) {
+
   return (
-    <div className='List'>{
-      list.map(item =>
-        <div key={item.code} className='List-item'>
-          <Item item={item} onDelete={onDeleteItem} onSelect={onSelectItem}/>
+    <div className={cn()}>{
+      props.list.map(item =>
+        <div key={item.code} className={cn(`item`)}>
+          <Item
+            item={item}
+            onDelete={props.onDeleteItem}
+            isCartItem={props.isCartItem}
+            onAdd={props.onAdd}
+          />
         </div>
       )}
     </div>
@@ -20,14 +29,13 @@ List.propTypes = {
     code: PropTypes.number
   })).isRequired,
   onDeleteItem: PropTypes.func,
-  onSelectItem: PropTypes.func
+  isCartItem: PropTypes.bool.isRequired,
+  onAdd: PropTypes.func,
 };
 
 List.defaultProps = {
-  onDeleteItem: () => {
-  },
-  onSelectItem: () => {
-  },
+  onDeleteItem: () => { },
+  onAdd: () => { }
 }
 
 export default React.memo(List);
