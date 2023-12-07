@@ -6,8 +6,7 @@ import BasketTotal from "../../components/basket-total";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 
-function Basket() {
-
+function Basket(props) {
   const store = useStore();
 
   const select = useSelector(state => ({
@@ -21,11 +20,16 @@ function Basket() {
     removeFromBasket: useCallback(_id => store.actions.basket.removeFromBasket(_id), [store]),
     // Закрытие любой модалки
     closeModal: useCallback(() => store.actions.modals.close(), [store]),
+    // Переход из корзины в описание продукта
+    navigate: useCallback((_id) => {
+      store.actions.modals.close()
+      props.navigate(_id)
+    }, [store]),
   }
 
   const renders = {
     itemBasket: useCallback((item) => {
-      return <ItemBasket item={item} onRemove={callbacks.removeFromBasket}/>
+      return (<ItemBasket item={item} onRemove={callbacks.removeFromBasket} onClick={callbacks.navigate} />)
     }, [callbacks.removeFromBasket]),
   };
 
