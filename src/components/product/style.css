@@ -1,0 +1,36 @@
+.Product {
+  padding: 20px 40px;
+  color: #000;
+  font-family: 'Arial';
+  font-size: 18px;
+  font-weight: 400;
+}
+.Product-description {
+  color: #000;
+  font-family: 'Arial';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.Product-madeIn {
+  margin-top: 20px;
+}
+.Product-category {
+  margin-top: 20px;
+}
+.Product-edition {
+  margin-top: 20px;
+}
+.Product-price {
+  margin-top: 20px;
+}
+.Product-button {
+  margin-top: 20px;
+}
+.strong {
+  color: #000;
+  font-family: 'Arial';
+  font-size: 18px;
+  font-weight: 700;
+}

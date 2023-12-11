@@ -3,7 +3,7 @@
   display: flex;
   justify-content: flex-start;
   transition: background-color 1s;
-  padding-left: 10px;
+  padding-left: 10px
 }
 
 .ItemBasket-code {
@@ -13,7 +13,16 @@
 .ItemBasket-title {
   width: 100%;
   padding: 20px 10px;
-  cursor: pointer;
+  transition: all 0.5s;
+  text-decoration: none;
+  color: #000;
+}
+
+@media (hover) {
+  .ItemBasket-title:hover {
+    cursor: pointer;
+    text-decoration-line: underline;
+  }
 }
 
 .ItemBasket-right {

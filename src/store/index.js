@@ -44,16 +44,20 @@ class Store {
   /**
    * Установка состояния
    * @param newState {Object}
+   * @param description {String}
+   * @param consoleOutput {Boolean}
    */
-  setState(newState, description = 'setState') {
-    console.group(
-      `%c${'store.setState'} %c${description}`,
-      `color: ${'#777'}; font-weight: normal`,
-      `color: ${'#333'}; font-weight: bold`,
-    );
-    console.log(`%c${'prev:'}`, `color: ${'#d77332'}`, this.state);
-    console.log(`%c${'next:'}`, `color: ${'#2fa827'}`, newState);
-    console.groupEnd();
+  setState(newState, description = 'setState', consoleOutput) {
+    if(consoleOutput){
+      console.group(
+        `%c${'store.setState'} %c${description}`,
+        `color: ${'#777'}; font-weight: normal`,
+        `color: ${'#333'}; font-weight: bold`,
+      );
+      console.log(`%c${'prev:'}`, `color: ${'#d77332'}`, this.state);
+      console.log(`%c${'next:'}`, `color: ${'#2fa827'}`, newState);
+      console.groupEnd();
+    }
 
     this.state = newState;
     // Вызываем всех слушателей

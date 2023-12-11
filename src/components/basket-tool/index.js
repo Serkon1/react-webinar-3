@@ -1,41 +1,26 @@
 import {memo} from "react";
-import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat, plural} from "../../utils";
 import './style.css';
-import { NavLink } from "react-router-dom";
 
-function BasketTool({sum, amount, onOpen}) {
+function BasketTool({amount, sum, openModalBasket, transfer}) {
   const cn = bem('BasketTool');
   return (
     <div className={cn()}>
-      <NavLink to="/" className={cn('link')}>Главная</NavLink>
-      <span className={cn('label')}>В корзине:</span>
+      <span className={cn('label')}>{transfer.basket}:</span>
       <span className={cn('total')}>
         {amount
           ? `${amount} ${plural(amount, {
-            one: 'товар',
-            few: 'товара',
-            many: 'товаров'
+            one: transfer.plural.one,
+            few: transfer.plural.few,
+            many: transfer.plural.many
           })} / ${numberFormat(sum)} ₽`
-          : `пусто`
+          : `${transfer.plural.empty}`
         }
       </span>
-      <button onClick={onOpen}>Перейти</button>
+        <button onClick={openModalBasket} className={'Basket-button button'}>{transfer.button}</button>
     </div>
   );
-}
-
-BasketTool.propTypes = {
-  onOpen: PropTypes.func.isRequired,
-  sum: PropTypes.number,
-  amount: PropTypes.number
-};
-
-BasketTool.defaultProps = {
-  onOpen: () => {},
-  sum: 0,
-  amount: 0
 }
 
 export default memo(BasketTool);

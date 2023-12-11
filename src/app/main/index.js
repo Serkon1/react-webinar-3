@@ -1,61 +1,87 @@
 import {memo, useCallback, useEffect} from 'react';
 import Item from "../../components/item";
-import PageLayout from "../../components/page-layout";
-import Head from "../../components/head";
-import BasketTool from "../../components/basket-tool";
 import List from "../../components/list";
+import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-import Pagination from '../../components/pagination';
-import { useLoaderData } from 'react-router-dom';
-import Basket from "../basket";
-import { useNavigate } from "react-router-dom"
+import PaginationControlPanel from "../../components/pagination-control-panel";
+import PageLayout from "../../components/page-layout";
+import ControlPanel from "../../components/control-panel";
+import {useHref, useNavigate} from "react-router-dom";
+import useLang from "../../store/use-lang";
 
 function Main() {
-  const navigate = useNavigate();
-  const activeModal = useSelector(state => state.modals.name);
 
-  const loaderData = useLoaderData();
-  const page = Number(loaderData.page) || 1;
-  const store = loaderData.store;
+  const history = useHref();
+  const page = Number(history.replace(/\//g, ''));
 
-  useEffect(() => {
-    store.actions.catalog.load(page);
-  }, [page]);
+  const {transfer, lang} = useLang()
+
+  const store = useStore();
+  const navigate = useNavigate()
+
 
   const select = useSelector(state => ({
     list: state.catalog.list,
     count: state.catalog.count,
+    currentPage: state.catalog.currentPage,
+    maxPage: state.catalog.maxPage,
     amount: state.basket.amount,
-    sum: state.basket.sum
+    sum: state.basket.sum,
+    language: state.language.value,
+    activeModal: state.modals.name
   }));
+
+  useEffect(() => {
+    if(!page) {
+      navigate('/1')
+      return
+    }
+    store.actions.catalog.load(page - 1, 10)
+  }, [history]);
 
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
-    navigate: useCallback((_id) => {
-      navigate(`/products/${_id}`);
-    }, []),
+    // Очистка состояния продукта
+    cleaningProduct: useCallback(() => {
+      store.actions.product.cleaningProduct()
+    }, [store, history]),
+    // Переключение языка
+    switchLang: useCallback((lang) => {
+      store.actions.language.switchLanguage(lang)
+    }, [store]),
   }
 
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket} onClick={callbacks.navigate} />
-    }, [callbacks.addToBasket]),
+      return <Item item={item} onAdd={callbacks.addToBasket} transfer={transfer.Item}/>
+    }, [callbacks.addToBasket, lang]),
   };
 
   return (
-    <>
-      <PageLayout>
-        <Head title='Магазин' />
-        <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-          sum={select.sum} />
-        <List list={select.list} renderItem={renders.item} />
-        <Pagination totalPages={Math.ceil(Number(select.count) / 10)} currentPage={page} />
-      </PageLayout>
-      {activeModal === 'basket' && <Basket navigate={callbacks.navigate} />}
-    </>
+    <PageLayout
+      head={transfer.head}
+      activeModal={select.activeModal}
+    >
+      <ControlPanel
+        openModalBasket={callbacks.openModalBasket}
+        cleaningProduct={callbacks.cleaningProduct}
+        switchLang={callbacks.switchLang}
+        amount={select.amount}
+        sum={select.sum}
+        currentPage={select.currentPage}
+        language={select.language}
+        transfer={transfer.controlPanel}
+      />
+      <List list={select.list} renderItem={renders.item}/>
+      <PaginationControlPanel
+        currentPage={select.currentPage + 1}
+        maxPage={select.maxPage}
+        changePagination={callbacks.changePagination}
+      />
+    </PageLayout>
   );
 }
 

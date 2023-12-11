@@ -1,0 +1,23 @@
+.Lang {
+  display: flex;
+}
+
+.Lang-button {
+  min-width: 20px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial';
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.5s;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.Lang-button.select {
+  background-color: #0087E9;
+}

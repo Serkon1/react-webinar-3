@@ -17,11 +17,11 @@ class StoreModule {
     return this.store.getState()[this.name];
   }
 
-  setState(newState, description = 'setState') {
+  setState(newState, description = 'setState', consoleOutput = true) {
     this.store.setState({
       ...this.store.getState(),
       [this.name]: newState
-    }, description)
+    }, description, consoleOutput)
   }
 
 }

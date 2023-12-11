@@ -1,0 +1,12 @@
+.Control-panel {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.main {
+  color: #0087E9;
+  font-family: 'Arial';
+  font-size: 18px;
+  text-decoration-line: underline;
+}

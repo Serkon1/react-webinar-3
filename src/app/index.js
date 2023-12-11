@@ -1,55 +1,39 @@
 import Main from "./main";
-import useStore from "../store/use-store";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Product from "./product";
+import {createBrowserRouter, Route, RouterProvider} from "react-router-dom";
+import PageLayout from "../components/page-layout";
+import ProductPage from "./product-page";
+import Error from "./error";
 
-/**
- * Приложение
- * @returns {React.ReactElement}
- */
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main/>,
+    children: [
+      {
+        path: "/:id",
+        element: <Main/>,
+      }
+    ],
+    errorElement: <Error/>
+  },
+  {
+    path: "/:id",
+    element: <Main/>,
+    errorElement: <Error/>
+  },
+  {
+    path: '/product/:id',
+    element: <ProductPage/>,
+    errorElement: <Error/>
+  },
+]);
+
 function App() {
 
-  // const activeModal = useSelector(state => state.modals.name);
 
-  const store = useStore();
-
-  const router = createBrowserRouter([
-    {
-      path: "/products/:_id",
-      element: <Product title="Каталог" />,
-      loader: async ({ params }) => {
-        const data = await store.actions.catalog.loadItemData(params._id);
-        return {
-          data,
-          store
-        }
-      }
-    },
-    {
-      path: "/page/:page",
-      element: <Main />,
-      loader: ({ params }) => {
-        return {
-          page: params.page || 1,
-          store
-        }
-      }
-    },
-    {
-      path: "/",
-      element: <Main />,
-      loader: () => {
-        return {
-          page: 1,
-          store
-        }
-      }
-    },
-
-  ]);
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}/>
     </>
   );
 }

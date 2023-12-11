@@ -34,45 +34,53 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
 
-/* 
-[1,2,3,...,10]
-[1,2,3,4...,10]
-[1,...,3,4,5,...,10]
-[1,...,7,8,9,10]
-[1,...,8,9,10]
-*/
-export function generatePagesList(curr, max) {
-  if (!curr || !max) return [];
-  let currPageIndex;
-  let pages;
-  if (max <= 7) {
-    for (let i = 1; i <= max; i++) {
-      pages.push(i);
-      return { pages, currPageIndex: curr - 1 };
+/**
+ * Заполнение массива, для последуещего рендеринга пагинации
+ * @param currentPage {Number}
+ * @param maxPage {Number}
+ * @returns {Array}
+ */
+export function fillingListPagination (currentPage, maxPage) {
+  const renderButton = []
+  for (let i = 1; i <= maxPage; i++) {
+    if(currentPage === 1) {
+      if(i > 1 && i < 4 || i === 1) {
+        renderButton.push({value: i, code: i})
+      } else if(i === 4) {
+        renderButton.push({value: '...', code: i})
+      }
+      if(i === maxPage) {
+        renderButton.push({value: i, code: i})
+      }
+      continue;
     }
-  } else {
+    if(currentPage === maxPage) {
+      if(i < maxPage && i > maxPage - 3 || i === maxPage) {
+        renderButton.push({value: i, code: i})
+      } else if(i === maxPage - 3) {
+        renderButton.push({value: '...', code: i})
+      }
+      if(i === 1) {
+        renderButton.push({value: i, code: i})
+      }
+      continue;
+    }
 
-    if (curr < 3) {
-      pages = [1, 2, 3, '...', max];
-      currPageIndex = curr
+    if(i === currentPage || i === currentPage + 1 || i === currentPage - 1) {
+      renderButton.push({value: i, code: i})
+      continue
+
     }
-    if (curr === 3) {
-      pages = [1, 2, 3, 4, '...', max];
-      currPageIndex = 3
+    if(currentPage === 3 && i === 1 || currentPage === maxPage - 2 && i === maxPage) {
+      renderButton.push({value: i, code: i})
+      continue
     }
-    if (curr > 3 && curr < max - 2) {
-      pages = [1, '...', curr - 1, curr, curr + 1, '...', max];
-      currPageIndex = 4
+    if(i === currentPage + 2 || i === currentPage - 2) {
+      renderButton.push({value: '...', code: i})
     }
-    if (curr === max - 2) {
-      pages = [1, '...', curr - 1, curr, curr + 1, max];
-      currPageIndex = 4
+    if(i === maxPage || i === 1) {
+      renderButton.push({value: i, code: i})
     }
-    if (curr > max - 2) {
-      pages = [1, '...', max - 2, max - 1, max];
-      currPageIndex = 5 - (max - curr)
-    }
-    currPageIndex -= 1;
   }
-  return { pages, currPageIndex }
+  return renderButton;
 }
