@@ -1,4 +1,6 @@
 {
+  "header.login": "Login",
+  "header.exit": "Exit",
   "title": "Shop",
   "menu.main": "Main",
   "basket.title": "Cart",
@@ -10,6 +12,14 @@
   "basket.unit": "pcs",
   "basket.delete": "Delete",
   "article.add": "Add",
+  "login.title": "Entry",
+  "login.login": "Login",
+  "login.password": "Password",
+  "login.entry": "Login",
+  "profile.title": "Profile",
+  "profile.name": "Name",
+  "profile.phone": "Phone",
+  "profile.email": "Email",
   "filter.reset": "Reset",
   "basket.articles": {
     "one": "article",

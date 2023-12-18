@@ -1,0 +1,26 @@
+.Profile {
+  padding: 40px 20px;
+}
+
+.Profile-title {
+  color: #000;
+  font-family: Arial;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.Profile-param {
+  margin-top: 20px;
+  color: #000;
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.Profile-value {
+  color: #000;
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: 700;
+}

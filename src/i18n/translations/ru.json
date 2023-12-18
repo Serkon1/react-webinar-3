@@ -1,4 +1,6 @@
 {
+  "header.login": "Вход",
+  "header.exit": "Выход",
   "title": "Магазин",
   "menu.main": "Главная",
   "basket.title": "Корзина",
@@ -10,6 +12,14 @@
   "basket.unit": "шт",
   "basket.delete": "Удалить",
   "article.add": "Добавить",
+  "login.title": "Вход",
+  "login.login": "Логин",
+  "login.password": "Пароль",
+  "login.entry": "Войти",
+  "profile.title": "Профиль",
+  "profile.name": "Имя",
+  "profile.phone": "Телефон",
+  "profile.email": "Почта",
   "filter.reset": "Сбросить",
   "basket.articles": {
     "one": "товар",

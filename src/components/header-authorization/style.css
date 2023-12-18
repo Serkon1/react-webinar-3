@@ -1,0 +1,12 @@
+.Header-authorization {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  border-bottom: 1px solid #DCDCDC;
+  background: #FFF;
+}
+
+.Profile-name {
+  margin-right: 20px;
+}
