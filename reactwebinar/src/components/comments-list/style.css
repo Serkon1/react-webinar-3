@@ -1,0 +1,12 @@
+.Comment-list_item {
+  display: flex;
+  flex-direction: column;
+}
+
+.Comment-list_item {
+  margin-top: 30px;
+}
+
+.Comment-list_item.first {
+  margin-top: 25px;
+}

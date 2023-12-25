@@ -1,0 +1,49 @@
+.Comment {
+}
+
+.Comment-title {
+  display: flex;
+}
+
+.Comment-title_name {
+  color: #000;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.Comment-title_name.current {
+  color: #666;
+  font-family: Arial;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.Comment-title_date {
+  margin-left: 10px;
+  color: #666;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.Comment-text {
+  margin-top: 10px;
+  color: #000;
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: 400;
+  word-break: break-word;
+}
+
+.Comment-button {
+  margin-top: 10px;
+  color: #0087E9;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+}
