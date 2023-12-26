@@ -1,6 +1,18 @@
 {
   "title": "Магазин",
   "menu.main": "Главная",
+
+  "profile.name": "Имя",
+  "profile.phone": "Телефон",
+  "profile.email": "Почта",
+
+
+  "article.madein": "Страна производитель",
+  "article.category": "Категория",
+  "article.yearissue": "Год выпуска",
+  "article.price": "Цена",
+
+
   "basket.title": "Корзина",
   "basket.open": "Перейти",
   "basket.close": "Закрыть",
@@ -15,6 +27,34 @@
     "many": "товаров",
     "other": "товара"
   },
+
+  "select.category": "Все",
+  "select.filter.order": "По порядку",
+  "select.filter.name": "По именованию",
+  "select.filter.ones": "Сначала дорогие",
+  "select.filter.ancients": "Древние",
+  "input.search": "Поиск",
+
+  "comments.comments": "Коментарии",
+  "comments.plural": {
+    "one": "Комментарий",
+    "few": "Комментария",
+    "many": "Комментариев",
+    "other": "Комментарий"
+  },
+  "comments.loading": "Загрузка",
+
+  "comment.login.sign": "Войдите",
+  "comment.login.comment": ", чтобы иметь возможность комментировать. ",
+  "comment.login.answer": ", чтобы иметь возможность ответить. ",
+  "comment.login.cancel": "Отмена",
+
+  "comment.answer": "Ответить",
+  "comment.input.answer": "Новый ответ",
+  "comment.input.comment": "Новый комментарий",
+  "comment.input.send": "Отправить",
+  "comment.input.cancel": "Отменить",
+
   "article.add": "Добавить",
   "filter.reset": "Сбросить",
   "auth.title": "Вход",

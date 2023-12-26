@@ -1,5 +1,4 @@
 import {memo, useCallback, useState} from 'react';
-import useTranslate from '../../hooks/use-translate';
 import Head from '../../components/head';
 import LocaleSelect from '../../containers/locale-select';
 import Navigation from '../../containers/navigation';
@@ -12,6 +11,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import useStore from '../../hooks/use-store';
 import useSelector from '../../hooks/use-selector';
 import useInit from '../../hooks/use-init';
+import useTranslate from "../../hooks/use-translate";
 
 function Login() {
 

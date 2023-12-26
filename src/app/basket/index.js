@@ -2,13 +2,12 @@ import {memo, useCallback} from 'react';
 import {useDispatch, useStore as useStoreRedux} from 'react-redux';
 import useStore from '../../hooks/use-store';
 import useSelector from '../../hooks/use-selector';
-import useInit from '../../hooks/use-init';
-import useTranslate from '../../hooks/use-translate';
 import ItemBasket from '../../components/item-basket';
 import List from '../../components/list';
 import ModalLayout from '../../components/modal-layout';
 import BasketTotal from '../../components/basket-total';
 import modalsActions from '../../store-redux/modals/actions';
+import useTranslate from "../../hooks/use-translate";
 
 function Basket() {
 
@@ -48,7 +47,7 @@ function Basket() {
   return (
     <ModalLayout title={t('basket.title')} labelClose={t('basket.close')}
                  onClose={callbacks.closeModal}>
-      <List list={select.list} renderItem={renders.itemBasket}/>
+      <List list={select.list} renderItem={renders.itemBasket} style={'dashed'}/>
       <BasketTotal sum={select.sum} t={t}/>
     </ModalLayout>
   );
